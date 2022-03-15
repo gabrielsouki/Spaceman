@@ -66,8 +66,8 @@ public class PlayerController : MonoBehaviour
 
         animator.SetBool(STATE_ON_THE_GROUND, IsTouchingTheGround());
         animator.SetFloat(STATE_VERTICAL_VELOCITY, m_rigidBody2D.velocity.y);
-        
-        if(m_rigidBody2D.velocity.x != 0f)
+
+        if (m_rigidBody2D.velocity.x != 0f)
         {
             animator.SetBool(STATE_IS_RUNNING, true);
         }
@@ -76,12 +76,12 @@ public class PlayerController : MonoBehaviour
             animator.SetBool(STATE_IS_RUNNING, false);
         }
 
-        if(m_rigidBody2D.velocity.x > 0)
+        if (m_rigidBody2D.velocity.x > 0)
         {
             characterRotationVector.y = 0;
             transform.rotation = Quaternion.Euler(0, characterRotationVector.y, 0);
         }
-        else if(m_rigidBody2D.velocity.x < 0)
+        else if (m_rigidBody2D.velocity.x < 0)
         {
             characterRotationVector.y = 180;
             transform.rotation = Quaternion.Euler(0, characterRotationVector.y, 0);
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //Si estamos dentro de la partida el personaje podra moverse
-        if(GameManager.sharedInstance.currentGameState == GameState.inGame)
+        if (GameManager.sharedInstance.currentGameState == GameState.inGame)
         {
             MoveCharacter(GetInput());
         }
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
         {
             m_rigidBody2D.velocity = new Vector2(0f, m_rigidBody2D.velocity.y);
         }
-        
+
     }
 
 
@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
             {
                 Jump(true);
             }
-            else if(Input.GetButtonDown("Jump") && !Input.GetKey(KeyCode.LeftShift))
+            else if (Input.GetButtonDown("Jump") && !Input.GetKey(KeyCode.LeftShift))
             {
                 Jump(false);
             }
@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
     //Returns true if the character is touching the ground, and false if it is not
     bool IsTouchingTheGround()
     {
-        if(Physics2D.Raycast(this.transform.position, Vector2.down, rayLenght, groundMask))
+        if (Physics2D.Raycast(this.transform.position, Vector2.down, rayLenght, groundMask))
         {
             return true;
         }
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
 
     void SetSingleton()
     {
-        if (sharedInstance == null){sharedInstance = this;}
+        if (sharedInstance == null) { sharedInstance = this; }
     }
 
     void SetInitialPoints() { healthPoints = INITIAL_HEALTH; manaPoints = INITIAL_MANA; }
@@ -219,9 +219,25 @@ public class PlayerController : MonoBehaviour
     {
         float travelledDistance = GetTravelledDistance();
         float previousMaxDistance = PlayerPrefs.GetFloat("maxscore", 0f);
-        if(travelledDistance > previousMaxDistance)
+        if (travelledDistance > previousMaxDistance)
         {
             PlayerPrefs.SetFloat("maxscore", travelledDistance);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "MovingPlatform")
+        {
+            this.transform.parent = collision.gameObject.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "MovingPlatform")
+        {
+            this.transform.parent = null;
         }
     }
 }

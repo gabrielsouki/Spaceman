@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform-small
       objectReference: {fileID: 0}
+    - target: {fileID: 5699687816089808836, guid: c55b08adddeb91c4599450be2ab824ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: MovingPlatform
+      objectReference: {fileID: 0}
     - target: {fileID: 7326583983843513422, guid: c55b08adddeb91c4599450be2ab824ab,
         type: 3}
       propertyPath: m_RootOrder
