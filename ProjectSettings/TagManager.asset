@@ -9,6 +9,7 @@ TagManager:
   - Platform
   - Menu
   - MovingPlatform
+  - Rock
   layers:
   - Default
   - TransparentFX

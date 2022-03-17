@@ -7,13 +7,17 @@ public class PlayerController : MonoBehaviour
     public static PlayerController sharedInstance;
     public DeathView deathView;
 
+    public bool temporalyMovement = true;
+
     public float temporaryMaxDistance;
 
     //Player movement variables
     [SerializeField] float jumpForce = 6f;
     [SerializeField] float runningSpeed = 2.0f;
     [SerializeField] Vector2 movement;
-    [SerializeField] Vector3 characterRotationVector;
+    //[SerializeField] Vector3 characterRotationVector;
+    SpriteRenderer m_spriteRenderer;
+    public bool facingLeft;
 
     Rigidbody2D m_rigidBody2D;
     Animator animator;
@@ -31,7 +35,7 @@ public class PlayerController : MonoBehaviour
     public const float SUPERJUMP_FORCE = 1.3f;
 
     public LayerMask groundMask;
-    [SerializeField] float rayLenght = 1.5f;
+    [SerializeField] float rayLenght = 2f;
 
     void Awake()
     {
@@ -43,6 +47,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        facingLeft = false;
+        m_spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         startPosition = this.transform.position;
     }
 
@@ -71,41 +77,47 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool(STATE_IS_RUNNING, true);
         }
-        else
+        else if(m_rigidBody2D.velocity.x == 0f)
         {
             animator.SetBool(STATE_IS_RUNNING, false);
         }
 
-        if (m_rigidBody2D.velocity.x > 0)
-        {
-            characterRotationVector.y = 0;
-            transform.rotation = Quaternion.Euler(0, characterRotationVector.y, 0);
-        }
-        else if (m_rigidBody2D.velocity.x < 0)
-        {
-            characterRotationVector.y = 180;
-            transform.rotation = Quaternion.Euler(0, characterRotationVector.y, 0);
-        }
+        SpriteFlip();
 
         //Liea que se dibuja para simbolizar el raycast que detecta si el suelo esta siendo pisado
-        //Debug.DrawRay(this.transform.position, Vector2.down * rayLenght, Color.red);
+        Debug.DrawRay(this.transform.position, Vector2.down * rayLenght, Color.red);
     }
 
     private void FixedUpdate()
     {
-        //Si estamos dentro de la partida el personaje podra moverse
-        if (GameManager.sharedInstance.currentGameState == GameState.inGame)
+        if (GameManager.sharedInstance.currentGameState == GameState.inGame && GetInput().x != 0)
         {
             MoveCharacter(GetInput());
         }
         //Si no estamos dentro de la partida la velocidad del personaje pasara a ser 0
-        else
+        /*else
         {
             m_rigidBody2D.velocity = new Vector2(0f, m_rigidBody2D.velocity.y);
-        }
+        }*/
+        
 
     }
 
+    void SpriteFlip()
+    {
+        if (GetInput().x > 0.1f)
+        {
+            facingLeft = false;
+            m_spriteRenderer.flipX = facingLeft;
+        }
+        else if (GetInput().x < -0.1f)
+        {
+            facingLeft = true;
+            m_spriteRenderer.flipX = facingLeft;
+        }
+
+        
+    }
 
     //Apply a vertical force to the character
     public void Jump(bool superJump)

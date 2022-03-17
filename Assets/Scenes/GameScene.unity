@@ -3456,8 +3456,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1782917706}
     - target: {fileID: 611714068, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
+      propertyPath: rayLenght
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 611714068, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
       propertyPath: runningSpeed
       value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289317394, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7275140570838166281, guid: 180bdd1bf49859547b7c0b0062f67a6c,
         type: 3}
@@ -3517,6 +3525,11 @@ PrefabInstance:
     - target: {fileID: 7275140570838166284, guid: 180bdd1bf49859547b7c0b0062f67a6c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275140570838166287, guid: 180bdd1bf49859547b7c0b0062f67a6c,
+        type: 3}
+      propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
