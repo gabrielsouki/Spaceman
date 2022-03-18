@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RocketEnemy : MonoBehaviour
 {
+    [SerializeField]
     int rocketDamage = 10;
     Proyectile m_proyectile;
 

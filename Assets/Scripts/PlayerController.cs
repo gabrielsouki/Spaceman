@@ -7,8 +7,6 @@ public class PlayerController : MonoBehaviour
     public static PlayerController sharedInstance;
     public DeathView deathView;
 
-    public bool temporalyMovement = true;
-
     public float temporaryMaxDistance;
 
     //Player movement variables
@@ -29,6 +27,7 @@ public class PlayerController : MonoBehaviour
     const string STATE_VERTICAL_VELOCITY = "verticalVelocity";
     const string STATE_IS_RUNNING = "isRunning";
 
+    [SerializeField]
     int healthPoints, manaPoints;
     public const int INITIAL_HEALTH = 100, INITIAL_MANA = 15, MAX_HEALTH = 200, MAX_MANA = 30, MIN_HEALTH = 0, MIN_MANA = 0;
     public const int SUPERJUMP_COST = 5;
