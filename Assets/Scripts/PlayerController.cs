@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController sharedInstance;
     public DeathView deathView;
+    public CapsuleCollider2D feetCollider;
 
     public float temporaryMaxDistance;
 
@@ -85,6 +86,8 @@ public class PlayerController : MonoBehaviour
 
         //Liea que se dibuja para simbolizar el raycast que detecta si el suelo esta siendo pisado
         Debug.DrawRay(this.transform.position, Vector2.down * rayLenght, Color.red);
+
+        SetFeetCollider();
     }
 
     private void FixedUpdate()
@@ -195,7 +198,17 @@ public class PlayerController : MonoBehaviour
     public void CollectHealth(int points)
     {
         healthPoints = Mathf.Clamp(healthPoints += points, MIN_HEALTH, MAX_HEALTH);
+
+        DeathCheck(healthPoints);
     }
+
+    void DeathCheck(int health)
+        {
+            if (health <= 0)
+            {
+                Die();
+            }
+        }
 
     public void CollectMana(int points)
     {
@@ -251,4 +264,18 @@ public class PlayerController : MonoBehaviour
             this.transform.parent = null;
         }
     }
+
+    void SetFeetCollider()
+    {
+        if (IsTouchingTheGround())
+        {
+            feetCollider.enabled = true;
+        }
+        else
+        {
+            feetCollider.enabled = false;
+        }
+    }
+
+    
 }

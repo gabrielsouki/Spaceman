@@ -1323,6 +1323,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_slider: {fileID: 716139353}
   type: 0
+--- !u!70 &734246129 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1289317394, guid: 180bdd1bf49859547b7c0b0062f67a6c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7275140571304390426}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &814868357
 GameObject:
   m_ObjectHideFlags: 0
@@ -3460,8 +3466,28 @@ PrefabInstance:
       value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 611714068, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
+      propertyPath: feetCollider
+      value: 
+      objectReference: {fileID: 734246129}
+    - target: {fileID: 611714068, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
       propertyPath: runningSpeed
       value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 611714072, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 611714072, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: e2db3dbd9e6166e409567592dd6e0069, type: 2}
+    - target: {fileID: 611714072, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289317394, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1289317394, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
       propertyPath: m_Offset.y
