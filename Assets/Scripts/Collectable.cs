@@ -18,12 +18,12 @@ public class Collectable : MonoBehaviour
         m_collider = GetComponent<CircleCollider2D>();
     }
 
-    void ShowItem()
+    /*void ShowItem()
     {
         sprite.enabled = true;
         m_collider.enabled = true;
         hasBeenCollected = false;
-    }
+    }*/
 
     void HideItem()
     {
@@ -34,12 +34,13 @@ public class Collectable : MonoBehaviour
     void CollectItem()
     {
         HideItem();
-        hasBeenCollected = true;
+        //hasBeenCollected = true;
 
         switch (this.type)
         {
             case CollectableType.money:
                 GameManager.sharedInstance.collectedCoins += this.value;
+                GetComponent<AudioSource>().Play();
                 break;
 
             case CollectableType.healthPotion:

@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundMask;
     [SerializeField] float rayLenght = 2f;
 
+    public GameObject gameOverSound;
+
     void Awake()
     {
         SetSingleton();
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameOverSound = GameObject.Find("GameOverSFX");
         facingLeft = false;
         m_spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         startPosition = this.transform.position;
@@ -126,13 +129,16 @@ public class PlayerController : MonoBehaviour
     {
         float jumpForceFactor = jumpForce;
 
-        if (superJump && manaPoints >= SUPERJUMP_COST)
-        {
-            manaPoints -= SUPERJUMP_COST;
-            jumpForceFactor *= SUPERJUMP_FORCE;
-        }
+        
         if (IsTouchingTheGround())
         {
+            if (superJump && manaPoints >= SUPERJUMP_COST)
+            {
+                 manaPoints -= SUPERJUMP_COST;
+                 jumpForceFactor *= SUPERJUMP_FORCE;
+             }
+
+            GetComponent<AudioSource>().Play();
             m_rigidBody2D.AddForce(Vector2.up * jumpForceFactor, ForceMode2D.Impulse);
         }
     }
@@ -182,6 +188,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
+        gameOverSound.GetComponent<AudioSource>().Play();
         deathView.SetDeathViewValues(GetTravelledDistance());
         SetMaxScore();
         this.animator.SetBool(STATE_ALIVE, false);
