@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Transform parent;
+
     public static PlayerController sharedInstance;
     public DeathView deathView;
     public CapsuleCollider2D feetCollider;
@@ -71,6 +73,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        parent = this.transform.parent;
+
         JumpCheck();
 
         animator.SetBool(STATE_ON_THE_GROUND, IsTouchingTheGround());
@@ -257,6 +261,14 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "MovingPlatform")
+        {
+            this.transform.parent = collision.gameObject.transform;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "MovingPlatform")
         {

@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Proyectile.cs" />
     <Compile Include="Assets\Scripts\RocketEnemy.cs" />
     <Compile Include="Assets\Scripts\ToDo.cs" />
+    <Compile Include="Assets\Scripts\WheelMovingPlatform.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
