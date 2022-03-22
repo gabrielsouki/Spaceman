@@ -10,22 +10,10 @@ public class Proyectile : MonoBehaviour
     Rigidbody2D m_ridigBody;
 
     public bool facingRight = false;
-
-    Vector3 startPosition;
-
-
     private void Awake()
     {
         m_ridigBody = GetComponent<Rigidbody2D>();
-        startPosition = this.transform.position;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        this.transform.position = startPosition;
-    }
-
     private void FixedUpdate()
     {
         SetProyectileDirection();
@@ -48,7 +36,7 @@ public class Proyectile : MonoBehaviour
 
     void ProyectileMovement()
     {
-        if(GameManager.sharedInstance.currentGameState == GameState.inGame)
+        if(GameManager.sharedInstance.currentGameState == GameState.inGame || GameManager.sharedInstance.currentGameState == GameState.gameOver)
         {
             m_ridigBody.velocity = Vector2.right * currentProyectileSpeed;
         }

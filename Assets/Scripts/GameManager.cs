@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum GameState {menu, inGame, gameOver};
+public enum GameState {mainMenu, inGame, gameOver};
 
 public class GameManager : MonoBehaviour
 {
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Menu();
+        MainMenu();
     }
 
     //Este metodo se ejecutara cuando el jugador comience una partida
@@ -42,16 +42,16 @@ public class GameManager : MonoBehaviour
     }
 
     //Este metodo se ejecutara para regresar al menu
-    public void Menu()
+    public void MainMenu()
     {
-        SetGameState(GameState.menu);
+        SetGameState(GameState.mainMenu);
     }
 
     private void SetGameState(GameState newGameState)
     {
         switch (newGameState)
         {
-            case GameState.menu:
+            case GameState.mainMenu:
                 MenuManager.sharedInstance.ShowMainMenu();
                 MenuManager.sharedInstance.HideHUD();
             break;

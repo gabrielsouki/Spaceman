@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController sharedInstance;
     public DeathView deathView;
     public CapsuleCollider2D feetCollider;
+    public CapsuleCollider2D bodyCollider;
 
     public float temporaryMaxDistance;
 
@@ -57,18 +58,7 @@ public class PlayerController : MonoBehaviour
         startPosition = this.transform.position;
     }
 
-    public void StartGame()
-    {
-        deathView.ResetDeathViewValues();
-        GameManager.sharedInstance.collectedCoins = 0;
-        temporaryMaxDistance = 0;
-        SetInitialPoints();
-        animator.SetBool(STATE_ALIVE, true);
-        animator.SetBool(STATE_ON_THE_GROUND, false);
-        this.transform.position = startPosition;
-        m_rigidBody2D.velocity = Vector2.zero;
-        CameraFollow.sharedInstance.ResetCameraPosition();
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -103,13 +93,6 @@ public class PlayerController : MonoBehaviour
         {
             MoveCharacter(GetInput());
         }
-        //Si no estamos dentro de la partida la velocidad del personaje pasara a ser 0
-        /*else
-        {
-            m_rigidBody2D.velocity = new Vector2(0f, m_rigidBody2D.velocity.y);
-        }*/
-        
-
     }
 
     void SpriteFlip()
@@ -132,8 +115,6 @@ public class PlayerController : MonoBehaviour
     public void Jump(bool superJump)
     {
         float jumpForceFactor = jumpForce;
-
-        
         if (IsTouchingTheGround())
         {
             if (superJump && manaPoints >= SUPERJUMP_COST)
@@ -182,20 +163,33 @@ public class PlayerController : MonoBehaviour
         m_rigidBody2D.velocity = new Vector2(direction.x * runningSpeed, m_rigidBody2D.velocity.y);
     }
 
-
     //This method receive the axis input and returnsa Vector2 with the movement
     Vector2 GetInput()
     {
         movement = new Vector2(Input.GetAxis("Horizontal"), m_rigidBody2D.velocity.y);
         return movement;
     }
-
+    public void StartGame()
+    {
+        deathView.ResetDeathViewValues();
+        GameManager.sharedInstance.collectedCoins = 0;
+        temporaryMaxDistance = 0;
+        SetInitialPoints();
+        animator.SetBool(STATE_ALIVE, true);
+        animator.SetBool(STATE_ON_THE_GROUND, false);
+        this.transform.position = startPosition;
+        m_rigidBody2D.velocity = Vector2.zero;
+        CameraFollow.sharedInstance.ResetCameraPosition();
+        bodyCollider.enabled = true;
+    }
     public void Die()
     {
         gameOverSound.GetComponent<AudioSource>().Play();
         deathView.SetDeathViewValues(GetTravelledDistance());
         SetMaxScore();
         this.animator.SetBool(STATE_ALIVE, false);
+        m_rigidBody2D.velocity = new Vector2(0f, m_rigidBody2D.velocity.y);
+        bodyCollider.enabled = false;
         GameManager.sharedInstance.GameOver();
     }
 

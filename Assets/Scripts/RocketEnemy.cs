@@ -22,6 +22,12 @@ public class RocketEnemy : MonoBehaviour
                 break;
             case "Coin":
                 break;
+            case "ExitZone":
+                break;
+            case "MovingPlatform":
+                break;
+            case "Potion":
+                break;
             default: m_proyectile.facingRight = !m_proyectile.facingRight;
                 break;
         }

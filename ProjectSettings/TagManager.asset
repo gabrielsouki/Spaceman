@@ -10,6 +10,8 @@ TagManager:
   - Menu
   - MovingPlatform
   - Rock
+  - ExitZone
+  - Potion
   layers:
   - Default
   - TransparentFX

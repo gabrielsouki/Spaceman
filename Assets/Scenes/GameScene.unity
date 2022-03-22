@@ -607,6 +607,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 156808483}
   m_CullTransparentMesh: 0
+--- !u!70 &177463602 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 611714072, guid: 180bdd1bf49859547b7c0b0062f67a6c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7275140571304390426}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &253836907
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,10 +1209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allTheLevelBlocks:
   - {fileID: 6815894628986118752, guid: cb282cb6864fe274fbe78f480bc8e541, type: 3}
-  - {fileID: 1785817776573381145, guid: 39dd39a7b49bf3942ac78bc04c19a093, type: 3}
-  - {fileID: 4008414767964611366, guid: 2fb5e3879753d8d4d8a2e0bd194162dc, type: 3}
-  - {fileID: 2825956300921105010, guid: 387394f5f9560194a9f6d8c43e4c3391, type: 3}
-  - {fileID: 4770395666579315871, guid: 9bcfec576e9531349adb748104f399e2, type: 3}
+  - {fileID: 5729790717315816339, guid: 4125ea3584120054db2b84df122a86c8, type: 3}
   currentLevelBlocks: []
   levelStartPosition: {fileID: 2081106601}
 --- !u!4 &701836706
@@ -1247,7 +1250,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708145335}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3b228c52c36ae714bb498430de1ce190, type: 3}
@@ -3712,6 +3715,14 @@ PrefabInstance:
       propertyPath: deathView
       value: 
       objectReference: {fileID: 1782917706}
+    - target: {fileID: 611714068, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
+      propertyPath: bodyCollider
+      value: 
+      objectReference: {fileID: 177463602}
+    - target: {fileID: 611714072, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7275140570838166281, guid: 180bdd1bf49859547b7c0b0062f67a6c,
         type: 3}
       propertyPath: m_Name

@@ -157,9 +157,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -284,10 +284,10 @@ TextureImporter:
         serializedVersion: 2
         x: 448
         y: 2403
-        width: 286
-        height: 204
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 288
+        height: 266
+      alignment: 9
+      pivot: {x: 0.5094937, y: 0.5359759}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -348,9 +348,9 @@ TextureImporter:
         x: 783
         y: 2396
         width: 316
-        height: 125
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 273
+      alignment: 9
+      pivot: {x: 0.56678444, y: 0.5400614}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
