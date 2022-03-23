@@ -156,8 +156,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 245df2465e2dbea4a90a79cddab28a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
   deathView: {fileID: 0}
   feetCollider: {fileID: 1289317394}
+  bodyCollider: {fileID: 611714072}
   temporaryMaxDistance: 0
   jumpForce: 20
   runningSpeed: 3.5
@@ -169,6 +171,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   rayLenght: 1.8
+  gameOverSound: {fileID: 0}
 --- !u!70 &1289317394
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

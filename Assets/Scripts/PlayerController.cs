@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform parent;
-
     public static PlayerController sharedInstance;
     public DeathView deathView;
     public CapsuleCollider2D feetCollider;
@@ -33,6 +31,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     int healthPoints, manaPoints;
+    public bool canBeDamaged;
+    [SerializeField]
+    float restorationTimer, restorationMaxTimer;
     public const int INITIAL_HEALTH = 100, INITIAL_MANA = 15, MAX_HEALTH = 200, MAX_MANA = 30, MIN_HEALTH = 0, MIN_MANA = 0;
     public const int SUPERJUMP_COST = 5;
     public const float SUPERJUMP_FORCE = 1.3f;
@@ -52,19 +53,20 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        canBeDamaged = true;
+        restorationTimer = restorationMaxTimer;
         gameOverSound = GameObject.Find("GameOverSFX");
         facingLeft = false;
         m_spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         startPosition = this.transform.position;
     }
 
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        parent = this.transform.parent;
-
+        RestorationTime();
         JumpCheck();
 
         animator.SetBool(STATE_ON_THE_GROUND, IsTouchingTheGround());
@@ -74,7 +76,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool(STATE_IS_RUNNING, true);
         }
-        else if(m_rigidBody2D.velocity.x == 0f)
+        else if (m_rigidBody2D.velocity.x == 0f)
         {
             animator.SetBool(STATE_IS_RUNNING, false);
         }
@@ -108,7 +110,7 @@ public class PlayerController : MonoBehaviour
             m_spriteRenderer.flipX = facingLeft;
         }
 
-        
+
     }
 
     //Apply a vertical force to the character
@@ -119,9 +121,9 @@ public class PlayerController : MonoBehaviour
         {
             if (superJump && manaPoints >= SUPERJUMP_COST)
             {
-                 manaPoints -= SUPERJUMP_COST;
-                 jumpForceFactor *= SUPERJUMP_FORCE;
-             }
+                manaPoints -= SUPERJUMP_COST;
+                jumpForceFactor *= SUPERJUMP_FORCE;
+            }
 
             GetComponent<AudioSource>().Play();
             m_rigidBody2D.AddForce(Vector2.up * jumpForceFactor, ForceMode2D.Impulse);
@@ -171,25 +173,30 @@ public class PlayerController : MonoBehaviour
     }
     public void StartGame()
     {
+        this.gameObject.transform.parent = null;
+        this.transform.position = startPosition;
         deathView.ResetDeathViewValues();
         GameManager.sharedInstance.collectedCoins = 0;
         temporaryMaxDistance = 0;
         SetInitialPoints();
         animator.SetBool(STATE_ALIVE, true);
         animator.SetBool(STATE_ON_THE_GROUND, false);
-        this.transform.position = startPosition;
         m_rigidBody2D.velocity = Vector2.zero;
         CameraFollow.sharedInstance.ResetCameraPosition();
+        m_rigidBody2D.constraints = RigidbodyConstraints2D.None;
+        m_rigidBody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         bodyCollider.enabled = true;
+        feetCollider.enabled = true;
     }
     public void Die()
     {
+        bodyCollider.enabled = false;
+        feetCollider.enabled = false;
         gameOverSound.GetComponent<AudioSource>().Play();
         deathView.SetDeathViewValues(GetTravelledDistance());
         SetMaxScore();
         this.animator.SetBool(STATE_ALIVE, false);
-        m_rigidBody2D.velocity = new Vector2(0f, m_rigidBody2D.velocity.y);
-        bodyCollider.enabled = false;
+        m_rigidBody2D.constraints = RigidbodyConstraints2D.FreezeAll;
         GameManager.sharedInstance.GameOver();
     }
 
@@ -202,9 +209,25 @@ public class PlayerController : MonoBehaviour
 
     public void CollectHealth(int points)
     {
-        healthPoints = Mathf.Clamp(healthPoints += points, MIN_HEALTH, MAX_HEALTH);
-
+        if (points < 0 && canBeDamaged == true || points > 0)
+        {
+            healthPoints = Mathf.Clamp(healthPoints += points, MIN_HEALTH, MAX_HEALTH);
+        }
+        canBeDamaged = false;
         DeathCheck(healthPoints);
+    }
+
+    void RestorationTime()
+    {
+        if (canBeDamaged == false)
+        {
+            restorationTimer -= Time.deltaTime;
+            if(restorationTimer <= 0f)
+            {
+                canBeDamaged = true;
+                restorationTimer = restorationMaxTimer;
+            }
+        }
     }
 
     void DeathCheck(int health)
@@ -289,6 +312,4 @@ public class PlayerController : MonoBehaviour
             feetCollider.enabled = false;
         }
     }
-
-    
 }

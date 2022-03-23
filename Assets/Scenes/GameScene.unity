@@ -607,12 +607,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 156808483}
   m_CullTransparentMesh: 0
---- !u!70 &177463602 stripped
-CapsuleCollider2D:
-  m_CorrespondingSourceObject: {fileID: 611714072, guid: 180bdd1bf49859547b7c0b0062f67a6c,
-    type: 3}
-  m_PrefabInstance: {fileID: 7275140571304390426}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &253836907
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,6 +947,7 @@ MonoBehaviour:
   target: {fileID: 1714352964}
   offset: {x: -2, y: 0, z: -10}
   dampingTime: 0.3
+  verticalCameraTop: 4
   velocity: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031
 Camera:
@@ -3716,12 +3711,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1782917706}
     - target: {fileID: 611714068, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
-      propertyPath: bodyCollider
-      value: 
-      objectReference: {fileID: 177463602}
-    - target: {fileID: 611714072, guid: 180bdd1bf49859547b7c0b0062f67a6c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+      propertyPath: restorationMaxTimer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7275140570838166281, guid: 180bdd1bf49859547b7c0b0062f67a6c,
         type: 3}
