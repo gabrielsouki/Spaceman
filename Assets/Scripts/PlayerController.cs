@@ -28,7 +28,9 @@ public class PlayerController : MonoBehaviour
     const string STATE_ON_THE_GROUND = "isOnTheGround";
     const string STATE_VERTICAL_VELOCITY = "verticalVelocity";
     const string STATE_IS_RUNNING = "isRunning";
+    const string STATE_DAMAGED = "hasBeenDamaged";
 
+    CameraShake shake;
     [SerializeField]
     int healthPoints, manaPoints;
     public bool canBeDamaged;
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        shake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
         canBeDamaged = true;
         restorationTimer = restorationMaxTimer;
         gameOverSound = GameObject.Find("GameOverSFX");
@@ -60,8 +63,6 @@ public class PlayerController : MonoBehaviour
         m_spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         startPosition = this.transform.position;
     }
-
-
 
     // Update is called once per frame
     void Update()
@@ -168,7 +169,11 @@ public class PlayerController : MonoBehaviour
     //This method receive the axis input and returnsa Vector2 with the movement
     Vector2 GetInput()
     {
-        movement = new Vector2(Input.GetAxis("Horizontal"), m_rigidBody2D.velocity.y);
+        if(GameManager.sharedInstance.currentGameState == GameState.inGame)
+        {
+            movement = new Vector2(Input.GetAxis("Horizontal"), m_rigidBody2D.velocity.y);
+            
+        }
         return movement;
     }
     public void StartGame()
@@ -187,6 +192,7 @@ public class PlayerController : MonoBehaviour
         m_rigidBody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         bodyCollider.enabled = true;
         feetCollider.enabled = true;
+        m_spriteRenderer.flipX = false;
     }
     public void Die()
     {
@@ -209,11 +215,17 @@ public class PlayerController : MonoBehaviour
 
     public void CollectHealth(int points)
     {
-        if (points < 0 && canBeDamaged == true || points > 0)
+        if (points < 0 && canBeDamaged == true)
+        {
+            healthPoints = Mathf.Clamp(healthPoints += points, MIN_HEALTH, MAX_HEALTH);
+            canBeDamaged = false;
+            animator.SetBool(STATE_DAMAGED, true);
+            shake.ShakeCamera();
+        }
+        if(points > 0)
         {
             healthPoints = Mathf.Clamp(healthPoints += points, MIN_HEALTH, MAX_HEALTH);
         }
-        canBeDamaged = false;
         DeathCheck(healthPoints);
     }
 
@@ -224,6 +236,7 @@ public class PlayerController : MonoBehaviour
             restorationTimer -= Time.deltaTime;
             if(restorationTimer <= 0f)
             {
+                animator.SetBool(STATE_DAMAGED, false);
                 canBeDamaged = true;
                 restorationTimer = restorationMaxTimer;
             }

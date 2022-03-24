@@ -18,7 +18,7 @@ public class RocketEnemy : MonoBehaviour
     {
         switch (collision.tag)
         {
-            case "Player": collision.GetComponent<PlayerController>().CollectHealth(-rocketDamage);
+            case "Player":
                 break;
             case "Coin":
                 break;
@@ -30,6 +30,14 @@ public class RocketEnemy : MonoBehaviour
                 break;
             default: m_proyectile.facingRight = !m_proyectile.facingRight;
                 break;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.tag == "Player")
+        {
+            collision.GetComponent<PlayerController>().CollectHealth(-rocketDamage);
         }
     }
 }

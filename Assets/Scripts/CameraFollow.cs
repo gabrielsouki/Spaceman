@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour
     [Tooltip("Distance than this component parent will be from the target")]
     public Vector3 offset = new Vector3(0.2f, 0.0f, -10f);
     [Tooltip("Delay to start the movement. Cinematic effect.")]
-    public float dampingTime = 0.3f, verticalCameraTop = 4;
+    public float dampingTime = 0.3f, verticalCameraTop = 3;
     [Tooltip("")]
     public Vector3 velocity = Vector3.zero;
     public static CameraFollow sharedInstance;
@@ -45,7 +45,7 @@ public class CameraFollow : MonoBehaviour
         Vector3 destination;
         if(target.position.y > verticalCameraTop)
         {
-            destination = new Vector3(target.position.x - offset.x, target.position.y - offset.y, offset.z);
+            destination = new Vector3(target.position.x - offset.x, target.position.y - verticalCameraTop, offset.z);
         }
         else
         {
