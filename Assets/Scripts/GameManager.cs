@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
                 MenuManager.sharedInstance.HideMainMenu();
                 MenuManager.sharedInstance.HideDeathMenu();
                 MenuManager.sharedInstance.ShowHUD();
+                MenuManager.sharedInstance.HidePauseMenu();
                 break;
             case GameState.gameOver:
                 MenuManager.sharedInstance.ShowDeathMenu();

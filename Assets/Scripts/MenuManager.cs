@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject deathMenu;
     public GameObject HUD;
+    public GameObject pauseMenu;
 
     private void Awake()
     {
@@ -25,6 +26,16 @@ public class MenuManager : MonoBehaviour
     public void HideMainMenu()
     {
         mainMenu.SetActive(false);
+    }
+
+    public void ShowPauseMenu()
+    {
+        pauseMenu.SetActive(true);
+    }
+
+    public void HidePauseMenu()
+    {
+        pauseMenu.SetActive(false);
     }
 
     public void ShowDeathMenu()
