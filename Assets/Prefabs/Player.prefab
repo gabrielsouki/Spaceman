@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 7275140570838166281}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.28, y: 1.52, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.299401, y: 2.299401, z: 2.299401}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -156,7 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 245df2465e2dbea4a90a79cddab28a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
   deathView: {fileID: 0}
   feetCollider: {fileID: 1289317394}
   bodyCollider: {fileID: 611714072}
@@ -167,6 +166,10 @@ MonoBehaviour:
   facingLeft: 0
   healthPoints: 0
   manaPoints: 0
+  canBeDamaged: 0
+  secondJumped: 0
+  restorationTimer: 0
+  restorationMaxTimer: 1
   groundMask:
     serializedVersion: 2
     m_Bits: 256
