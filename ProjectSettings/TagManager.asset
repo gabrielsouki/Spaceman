@@ -12,6 +12,7 @@ TagManager:
   - Rock
   - ExitZone
   - Potion
+  - GameManager
   layers:
   - Default
   - TransparentFX
