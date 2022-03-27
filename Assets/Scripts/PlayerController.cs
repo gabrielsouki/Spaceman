@@ -12,10 +12,8 @@ public class PlayerController : MonoBehaviour
     public float temporaryMaxDistance;
 
     //Player movement variables
-    [SerializeField] float jumpForce = 6f;
-    [SerializeField] float runningSpeed = 2.0f;
+    [SerializeField] float jumpForce = 6f, runningSpeed = 2.0f;
     [SerializeField] Vector2 movement;
-    //[SerializeField] Vector3 characterRotationVector;
     SpriteRenderer m_spriteRenderer;
     public bool facingLeft;
 
@@ -34,11 +32,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     int healthPoints, manaPoints;
     public bool canBeDamaged;
+    public bool secondJumped;
     [SerializeField]
     float restorationTimer, restorationMaxTimer;
-    public const int INITIAL_HEALTH = 100, INITIAL_MANA = 15, MAX_HEALTH = 200, MAX_MANA = 30, MIN_HEALTH = 0, MIN_MANA = 0;
-    public const int SUPERJUMP_COST = 5;
-    public const float SUPERJUMP_FORCE = 1.3f;
+    public const int INITIAL_HEALTH = 100, INITIAL_MANA = 100, MAX_HEALTH = 200, MAX_MANA = 200, MIN_HEALTH = 0, MIN_MANA = 0;
+    public const int SECOND_JUMP_COST = 50;
+    public const float SECOND_JUMP_FORCE = 7f;
 
     public LayerMask groundMask;
     [SerializeField] float rayLenght = 2f;
@@ -55,6 +54,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        secondJumped = false;
         shake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
         canBeDamaged = true;
         restorationTimer = restorationMaxTimer;
@@ -115,35 +115,34 @@ public class PlayerController : MonoBehaviour
     }
 
     //Apply a vertical force to the character
-    public void Jump(bool superJump)
+    public void Jump()
     {
-        float jumpForceFactor = jumpForce;
-        if (IsTouchingTheGround())
-        {
-            if (superJump && manaPoints >= SUPERJUMP_COST)
-            {
-                manaPoints -= SUPERJUMP_COST;
-                jumpForceFactor *= SUPERJUMP_FORCE;
-            }
-
-            GetComponent<AudioSource>().Play();
-            m_rigidBody2D.AddForce(Vector2.up * jumpForceFactor, ForceMode2D.Impulse);
-        }
+        GetComponent<AudioSource>().Play();
+        m_rigidBody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
     void JumpCheck()
     {
         if (GameManager.sharedInstance.currentGameState == GameState.inGame)
         {
-            if (Input.GetButtonDown("Jump") && Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetButtonDown("Jump") && IsTouchingTheGround())
             {
-                Jump(true);
+                Jump();
+                secondJumped = false;
             }
-            else if (Input.GetButtonDown("Jump") && !Input.GetKey(KeyCode.LeftShift))
+            else if(Input.GetButtonDown("Jump") && !IsTouchingTheGround() && manaPoints >= SECOND_JUMP_COST && secondJumped == false)
             {
-                Jump(false);
+                SecondJump();
+                secondJumped = true;
+                CollectMana(-SECOND_JUMP_COST);
             }
         }
+    }
+
+    void SecondJump()
+    {
+        GetComponent<AudioSource>().Play();
+        m_rigidBody2D.velocity = new Vector2 (m_rigidBody2D.velocity.x, Vector2.up.y * SECOND_JUMP_FORCE);
     }
 
     //Returns true if the character is touching the ground, and false if it is not
