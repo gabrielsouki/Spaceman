@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\CameraShake.cs" />
     <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\Scripts\DeathView.cs" />
     <Compile Include="Assets\Scripts\ExitZone.cs" />
@@ -66,8 +67,15 @@
     <Compile Include="Assets\Scripts\LevelBlock.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\PlayerBar.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Proyectile.cs" />
+    <Compile Include="Assets\Scripts\RocketEnemy.cs" />
+    <Compile Include="Assets\Scripts\SpwnPlatforms.cs" />
+    <Compile Include="Assets\Scripts\ToDo.cs" />
+    <Compile Include="Assets\Scripts\VerticalMovingPlatform.cs" />
+    <Compile Include="Assets\Scripts\WheelMovingPlatform.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

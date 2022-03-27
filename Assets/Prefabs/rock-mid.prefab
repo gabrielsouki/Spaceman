@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5037368390007012853}
   - component: {fileID: 5037368390007012852}
+  - component: {fileID: 6250656277017659182}
   m_Layer: 8
   m_Name: rock-mid
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5037368390007012851}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.23, y: -3.18, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -69,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -9
   m_Sprite: {fileID: 6691287902862017832, guid: ae7dea88b91c80445a29e0bd577ebc68,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -82,3 +83,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &6250656277017659182
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037368390007012851}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: d9de2b04677512d49829b86e662e4130, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.7899998, y: 1.2502298}
+    newSize: {x: 1.7899998, y: 1.2502298}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.82332706, y: -0.36966705}
+      - {x: 0.51592344, y: -0.04697012}
+      - {x: 0.5297109, y: 0.11178255}
+      - {x: 0.4331198, y: 0.23753306}
+      - {x: 0.3109124, y: 0.27825418}
+      - {x: 0.09112955, y: 0.6032553}
+      - {x: -0.10137829, y: 0.60325533}
+      - {x: -0.18418188, y: 0.553454}
+      - {x: -0.38821855, y: 0.20837362}
+      - {x: -0.64197797, y: 0.026641786}
+      - {x: -0.8160239, y: -0.22787054}
+      - {x: -0.8696681, y: -0.4509648}
+      - {x: -0.86047643, y: -0.5323412}
+      - {x: -0.7125785, y: -0.54462296}
+      - {x: -0.28002006, y: -0.6243365}
+      - {x: 0.31957263, y: -0.6243365}
+      - {x: 0.82792294, y: -0.59826726}
+      - {x: 0.893096, y: -0.5330941}
+      - {x: 0.85632944, y: -0.43567157}

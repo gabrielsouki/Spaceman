@@ -8,6 +8,11 @@ TagManager:
   - Enemy
   - Platform
   - Menu
+  - MovingPlatform
+  - Rock
+  - ExitZone
+  - Potion
+  - GameManager
   layers:
   - Default
   - TransparentFX

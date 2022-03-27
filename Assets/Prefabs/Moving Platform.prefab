@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6511247841469846829}
   m_Layer: 0
   m_Name: Moving Platform
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,6 +62,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Platform-small
+      objectReference: {fileID: 0}
+    - target: {fileID: 5699687816089808836, guid: c55b08adddeb91c4599450be2ab824ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: MovingPlatform
       objectReference: {fileID: 0}
     - target: {fileID: 7326583983843513422, guid: c55b08adddeb91c4599450be2ab824ab,
         type: 3}
